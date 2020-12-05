@@ -1,0 +1,12 @@
+[submodule "handpose-neural-network-classification"]
+	path = handpose-neural-network-classification
+	url = https://github.com/davidalexandercurrie/handpose-neural-network-classification.git
+	branch = main
+[submodule "posenet-neural-network-classification"]
+	path = posenet-neural-network-classification
+	url = https://github.com/davidalexandercurrie/posenet-neural-network-classification.git
+	branch = main
+[submodule "facemesh-neural-network-classification"]
+	path = facemesh-neural-network-classification
+	url = https://github.com/davidalexandercurrie/facemesh-neural-network-classification.git
+	branch = main
