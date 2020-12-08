@@ -10,3 +10,15 @@
 	path = facemesh-neural-network-classification
 	url = https://github.com/davidalexandercurrie/facemesh-neural-network-classification.git
 	branch = main
+[submodule "facemesh-neural-network-regression"]
+	path = facemesh-neural-network-regression
+	url = https://github.com/davidalexandercurrie/facemesh-neural-network-regression.git
+	branch = main
+[submodule "handpose-neural-network-regression"]
+	path = handpose-neural-network-regression
+	url = https://github.com/davidalexandercurrie/handpose-neural-network-regression.git
+	branch = main
+[submodule "posenet-neural-network-regression"]
+	path = posenet-neural-network-regression
+	url = https://github.com/davidalexandercurrie/posenet-neural-network-regression.git
+	branch = main
