@@ -18,7 +18,7 @@ const io = require('socket.io')(http, options);
 io.on('connection', socket => {
   console.log(socket.id);
   socket.on('disconnect', () => console.log(`${socket} disconnected`));
-  socket.on('posenet', data => console.log(data));
-  socket.on('handpose', data => console.log(data));
-  socket.on('facemesh', data => console.log(data));
+  socket.on('posenet', data => socket.broadcast.emit('posenet', data));
+  socket.on('handpose', data => socket.broadcast.emit('handpose', data));
+  socket.on('facemesh', data => socket.broadcast.emit('facemesh', data));
 });
