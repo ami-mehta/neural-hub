@@ -19,3 +19,7 @@ button {
   width: 10em;
   height: 5em;
 }
+
+h1 {
+  text-decoration: underline;
+}
