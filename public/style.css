@@ -8,11 +8,14 @@ html {
 .buttons {
   margin: 0 auto;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  width: 80%;
 }
 
 button {
   padding: 0.5em;
   margin: 1em;
-  font-size: 1em;
+  font-size: 0.5em;
+  width: 10em;
+  height: 5em;
 }
