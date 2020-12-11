@@ -48,6 +48,7 @@ io.on('connection', socket => {
     let index = amiData.findIndex(person => person.socketid == socket.id);
     amiData.splice(index, 1);
   });
+  console.log('help');
   socket.on('posenet', data => {
     // dataToSendToMax.model1 = data.data[0].label;
     // let index = amiData.findIndex(person => person.socketid == socket.id);
