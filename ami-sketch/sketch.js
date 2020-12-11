@@ -12,4 +12,5 @@ function draw() {
 
 function onReceive(data) {
   console.log(data);
+  console.log(Object.keys(data));
 }

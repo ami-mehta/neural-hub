@@ -11,7 +11,7 @@ http.listen(process.env.PORT || 3000, process.env.IP, () =>
 
 let dataToSendToMax = { model1: 0, model2: 0, model3: 0 };
 let startDataSend = true;
-let amiData = {};
+let amiData = [];
 
 app.use('/', express.static('public'));
 app.use(
@@ -46,15 +46,42 @@ io.on('connection', socket => {
   socket.on('disconnect', () => console.log(`${socket} disconnected`));
   socket.on('posenet', data => {
     dataToSendToMax.model1 = data[0].label;
-    amiData[socket] = data[0].label;
+    let index = amiData.findIndex(person => person.socketid == socket.id);
+    index === -1
+      ? amiData.push({
+          socketid: socket.id,
+          value: data[0].label,
+        })
+      : (amiData[index] = {
+          socketid: socket.id,
+          value: data[0].label,
+        });
   });
   socket.on('handpose', data => {
     dataToSendToMax.model2 = data[0].label;
-    amiData[socket] = data[0].label;
+    let index = amiData.findIndex(person => person.socketid == socket.id);
+    index === -1
+      ? amiData.push({
+          socketid: socket.id,
+          value: data[0].label,
+        })
+      : (amiData[index] = {
+          socketid: socket.id,
+          value: data[0].label,
+        });
   });
   socket.on('facemesh', data => {
     dataToSendToMax.model3 = data[0].label;
-    amiData[socket] = data[0].label;
+    let index = amiData.findIndex(person => person.socketid == socket.id);
+    index === -1
+      ? amiData.push({
+          socketid: socket.id,
+          value: data[0].label,
+        })
+      : (amiData[index] = {
+          socketid: socket.id,
+          value: data[0].label,
+        });
   });
   if (startDataSend) {
     setInterval(() => {
