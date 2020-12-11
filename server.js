@@ -87,7 +87,7 @@ io.on('connection', socket => {
       : (amiData[index] = {
           socketid: socket.id,
           value: data.data[0].label,
-          name: data.data[0].name,
+          name: data.name,
         });
     console.log(data);
   });
