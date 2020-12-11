@@ -43,45 +43,53 @@ app.use('/ami', express.static('ami-sketch'));
 const io = require('socket.io')(http, options);
 io.on('connection', socket => {
   console.log(socket.id);
-  socket.on('disconnect', () => console.log(`${socket} disconnected`));
-  socket.on('posenet', data => {
-    dataToSendToMax.model1 = data[0].label;
+  socket.on('disconnect', () => {
+    console.log(`${socket} disconnected`);
     let index = amiData.findIndex(person => person.socketid == socket.id);
-    index === -1
-      ? amiData.push({
-          socketid: socket.id,
-          value: data[0].label,
-        })
-      : (amiData[index] = {
-          socketid: socket.id,
-          value: data[0].label,
-        });
+    amiData.splice(index, 1);
+  });
+  socket.on('posenet', data => {
+    // dataToSendToMax.model1 = data.data[0].label;
+    // let index = amiData.findIndex(person => person.socketid == socket.id);
+    // index === -1
+    //   ? amiData.push({
+    //       socketid: socket.id,
+    //       value: data.data[0].label,
+    //     })
+    //   : (amiData[index] = {
+    //       socketid: socket.id,
+    //       value: data.data[0].label,
+    //       name: data.data[0].name,
+    //     });
   });
   socket.on('handpose', data => {
-    dataToSendToMax.model2 = data[0].label;
-    let index = amiData.findIndex(person => person.socketid == socket.id);
-    index === -1
-      ? amiData.push({
-          socketid: socket.id,
-          value: data[0].label,
-        })
-      : (amiData[index] = {
-          socketid: socket.id,
-          value: data[0].label,
-        });
+    // dataToSendToMax.model2 = data.data[0].label;
+    // let index = amiData.findIndex(person => person.socketid == socket.id);
+    // index === -1
+    //   ? amiData.push({
+    //       socketid: socket.id,
+    //       value: data.data[0].label,
+    //     })
+    //   : (amiData[index] = {
+    //       socketid: socket.id,
+    //       value: data.data[0].label,
+    //       name: data.data[0].name,
+    //     });
   });
   socket.on('facemesh', data => {
-    dataToSendToMax.model3 = data[0].label;
+    // dataToSendToMax.model3 = data.data[0].label;
     let index = amiData.findIndex(person => person.socketid == socket.id);
     index === -1
       ? amiData.push({
           socketid: socket.id,
-          value: data[0].label,
+          value: data.data[0].label,
         })
       : (amiData[index] = {
           socketid: socket.id,
-          value: data[0].label,
+          value: data.data[0].label,
+          name: data.data[0].name,
         });
+    // console.log(data);
   });
   if (startDataSend) {
     setInterval(() => {
