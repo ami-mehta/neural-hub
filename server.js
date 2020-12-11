@@ -11,6 +11,7 @@ http.listen(process.env.PORT || 3000, process.env.IP, () =>
 
 let dataToSendToMax = { model1: 0, model2: 0, model3: 0 };
 let startDataSend = true;
+let amiData = {};
 
 app.use('/', express.static('public'));
 app.use(
@@ -37,6 +38,7 @@ app.use(
   '/facemesh-regression',
   express.static('facemesh-neural-network-regression')
 );
+app.use('/ami', express.static('ami-sketch'));
 
 const io = require('socket.io')(http, options);
 io.on('connection', socket => {
@@ -44,16 +46,20 @@ io.on('connection', socket => {
   socket.on('disconnect', () => console.log(`${socket} disconnected`));
   socket.on('posenet', data => {
     dataToSendToMax.model1 = data[0].label;
+    amiData[socket] = data[0].label;
   });
   socket.on('handpose', data => {
     dataToSendToMax.model2 = data[0].label;
+    amiData[socket] = data[0].label;
   });
   socket.on('facemesh', data => {
     dataToSendToMax.model3 = data[0].label;
+    amiData[socket] = data[0].label;
   });
   if (startDataSend) {
     setInterval(() => {
       socket.broadcast.emit('max', dataToSendToMax);
+      socket.broadcast.emit('ami', amiData);
     }, 100);
     startDataSend = false;
   }
